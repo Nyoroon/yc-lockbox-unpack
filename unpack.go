@@ -12,12 +12,12 @@ const tag = "secretKey"
 
 func UnpackPayload(payload *lockbox.Payload, v interface{}) error {
 	rv := reflect.ValueOf(v)
+
 	if rv.Kind() != reflect.Ptr || rv.IsNil() || rv.Elem().Kind() != reflect.Struct {
 		return fmt.Errorf("v should be pointer to struct, got: %v", reflect.TypeOf(v))
 	}
 
 	rv = rv.Elem()
-	rv.Addr()
 
 	tagToFieldName := make(map[string]string)
 	nameToFieldName := make(map[string]string)
